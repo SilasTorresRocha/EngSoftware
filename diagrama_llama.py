@@ -4,7 +4,7 @@ from openai import OpenAI
 import sys
 
 # Configuração da API
-OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY") or " "
+OPENROUTER_API_KEY = "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"
 
 def extract_plantuml(response_text: str) -> str:
     """Extrai o bloco PlantUML da resposta do modelo"""

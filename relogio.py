@@ -149,3 +149,8 @@ if __name__ == "__main__":
     root.mainloop()
 
 #espaco destinado para teste do gits
+
+#local para fazer teste com o git e commit s
+
+#em fim 
+#gernano nada
