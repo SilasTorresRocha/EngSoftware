@@ -1,63 +1,58 @@
 @startuml
 class Tema {
-    - nome : str
-    - fundo : str
-    - texto : str
-    - botao_fundo : str
-    - botao_texto : str
-    + __init__(nome : str, fundo : str, texto : str, botao_fundo : str, botao_texto : str)
+    nome : str
+    fundo : str
+    texto : str
+    botao_fundo : str
+    botao_texto : str
+    __init__(nome, fundo, texto, botao_fundo, botao_texto)
 }
 
 class RelogioDigital {
-    - tema : Tema
-    - master : tk.Tk
-    - label_relogio : tk.Label
-    - label_data : tk.Label
-    + __init__(master : tk.Tk, tema : Tema)
-    + atualizar_horario()
-    + aplicar_tema(novo_tema : Tema)
+    tema : Tema
+    master : tk.Tk
+    label_relogio : tk.Label
+    label_data : tk.Label
+    __init__(master, tema)
+    atualizar_horario()
+    aplicar_tema(novo_tema : Tema)
 }
 
 class GerenciadorTemas {
-    - temas : dict
-    - tema_atual : str
-    + __init__()
-    + obter_tema(nome : str = None) : Tema
-    + alternar_tema() : Tema
+    temas : dict
+    tema_atual : str
+    __init__()
+    obter_tema(nome=None) : Tema
+    alternar_tema() : Tema
 }
 
 class BotaoTema {
-    - gerenciador : GerenciadorTemas
-    + __init__(master : tk.Tk, gerenciador : GerenciadorTemas, callback)
-    + atualizar_aparencia(tema : Tema)
+    gerenciador : GerenciadorTemas
+    __init__(master, gerenciador, callback)
+    atualizar_aparencia(tema : Tema)
 }
 
 class RelogioApp {
-    - janela : tk.Tk
-    - gerenciador_temas : GerenciadorTemas
-    - container : tk.Frame
-    - relogio : RelogioDigital
-    - botao_tema : BotaoTema
-    + __init__(janela : tk.Tk)
-    + criar_widgets()
-    + alternar_tema()
+    janela : tk.Tk
+    gerenciador_temas : GerenciadorTemas
+    container : tk.Frame
+    relogio : RelogioDigital
+    botao_tema : BotaoTema
+    __init__(janela)
+    criar_widgets()
+    alternar_tema()
 }
 
-RelogioDigital -- Tema : - tema
-RelogioDigital -- tk.Label : - label_relogio
-RelogioDigital -- tk.Label : - label_data
-
-GerenciadorTemas -- Tema : - temas
-
-BotaoTema -- GerenciadorTemas : - gerenciador
-
-RelogioApp -- GerenciadorTemas : - gerenciador_temas
-RelogioApp -- RelogioDigital : - relogio
-RelogioApp -- BotaoTema : - botao_tema
-
-RelogioDigital -- tk.Frame : herança
-BotaoTema -- tk.Button : herança
-RelogioApp -- tk.Tk : - janela
-RelogioApp -- tk.Frame : - container
+RelogioDigital -- Tema : usa
+RelogioDigital -- tk.Label : usa
+GerenciadorTemas -- Tema : cria/usa
+BotaoTema -- GerenciadorTemas : usa
+BotaoTema -- Tema : usa
+RelogioApp -- GerenciadorTemas : usa
+RelogioApp -- RelogioDigital : usa
+RelogioApp -- BotaoTema : usa
+RelogioDigital --|> tk.Frame
+BotaoTema --|> tk.Button
+RelogioApp --|> tk.Frame
 
 @enduml

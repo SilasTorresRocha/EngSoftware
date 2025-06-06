@@ -9,12 +9,11 @@ class Tema {
 
 class RelogioDigital {
     - tema: Tema
-    - master: Master
+    - master: Tk
     - label_relogio: Label
     - label_data: Label
-    - master: Master
 
-    + __init__(master: Master, tema: Tema)
+    + __init__(master, tema)
     + atualizar_horario()
     + aplicar_tema(novo_tema: Tema)
 }
@@ -33,26 +32,27 @@ class BotaoTema {
     - callback: Callback
     - tema: Tema
 
-    + __init__(master: Master, gerenciador: GerenciadorTemas, callback: Callback)
+    + __init__(master, gerenciador, callback)
     + atualizar_aparencia(tema: Tema)
 }
 
 class RelogioApp {
-    - janela: Janela
+    - janela: Tk
     - gerenciador_temas: GerenciadorTemas
     - container: Frame
     - relogio: RelogioDigital
     - botao_tema: BotaoTema
 
-    + __init__(janela: Janela)
+    + __init__(janela)
     + criar_widgets()
     + alternar_tema()
 }
 
-RelogioDigital *-- Tema : utiliza
-RelogioDigital *-- Master : extende
-BotaoTema *-- GerenciadorTemas : utiliza
-RelogioApp *-- GerenciadorTemas : possui
-RelogioApp *-- RelogioDigital : possui
-RelogioApp *-- BotaoTema : possui
+RelogioDigital *-- Tema
+GerenciadorTemas *-- Tema
+BotaoTema *-- GerenciadorTemas
+RelogioApp *-- RelogioDigital
+RelogioApp *-- BotaoTema
+RelogioApp *-- GerenciadorTemas
+
 @enduml
