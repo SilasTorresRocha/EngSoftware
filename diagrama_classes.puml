@@ -1,0 +1,60 @@
+@startuml
+class Tema {
+    - nome: str
+    - fundo: str
+    - texto: str
+    - botao_fundo: str
+    - botao_texto: str
+    + __init__(nome: str, fundo: str, texto: str, botao_fundo: str, botao_texto: str)
+}
+
+class RelogioDigital {
+    - tema: Tema
+    - master: tk.Tk
+    - label_relogio: tk.Label
+    - label_data: tk.Label
+    + __init__(master: tk.Tk, tema: Tema)
+    + atualizar_horario()
+    + aplicar_tema(novo_tema: Tema)
+}
+
+class GerenciadorTemas {
+    - temas: dict
+    - tema_atual: str
+    + __init__()
+    + obter_tema(nome: str = None)
+    + alternar_tema()
+}
+
+class BotaoTema {
+    - gerenciador: GerenciadorTemas
+    + __init__(master: tk.Tk, gerenciador: GerenciadorTemas, callback)
+    + atualizar_aparencia(tema: Tema)
+}
+
+class RelogioApp {
+    - janela: tk.Tk
+    - gerenciador_temas: GerenciadorTemas
+    - container: tk.Frame
+    - relogio: RelogioDigital
+    - botao_tema: BotaoTema
+    + __init__(janela: tk.Tk)
+    + criar_widgets()
+    + alternar_tema()
+}
+
+RelogioDigital -- Tema
+RelogioDigital -- tk.Label
+GerenciadorTemas -- Tema
+BotaoTema -- GerenciadorTemas
+RelogioApp -- GerenciadorTemas
+RelogioApp -- RelogioDigital
+RelogioApp -- BotaoTema
+RelogioDigital -- tk.Frame
+BotaoTema -- tk.Button
+RelogioApp -- tk.Frame
+
+tk.Frame <|-- RelogioDigital
+tk.Button <|-- BotaoTema
+
+@enduml
