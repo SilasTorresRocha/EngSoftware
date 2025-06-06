@@ -147,3 +147,5 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = RelogioApp(root)
     root.mainloop()
+
+#espaco destinado para teste do gits
